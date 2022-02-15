@@ -103,4 +103,9 @@ while True:
     else:
         print("Tokio veiksmo nera")
 
-#gsdfgdsfgdsfg
+fds
+
+fsd
+f
+sd
+forsd
