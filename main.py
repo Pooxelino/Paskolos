@@ -1,45 +1,62 @@
 class Paskola:
     def __init__(self, suma, terminas, palukanos):
+        '''
+        :param suma: suma, kuria norima pasiskolinti
+        :param terminas: terminas, kuriam skolinama suma
+        :param palukanos: paskolos palukanos
+        '''
         self.suma = suma
         self.terminas = terminas
         self.palukanos = palukanos
-        self.menesis = []
+        self.menesis_index = []
         self.grazintina = 0
-        self.liko = []
-        self.prisk_pal = []
-        self.moketi = []
+        self.liko_grazinti = []
+        self.priskaiciuota_palukanu = []
+        self.moketi_menesi = []
 
     def skaiciuokle(self):
+        '''
+        :return: apskaiciuoja kiek reikia moketi kas menesi, menesio indeksa, palukanas, kiek liko grazinti, kiek sumoketa
+        '''
         self.grazintina = self.suma / self.terminas  # kiek mokama kas menesi
         for i in range(self.terminas):
-            self.menesis.append(i + 1)  # menesio indeksas
-            pal = (self.suma * (self.palukanos / 100)) / 12
-            self.prisk_pal.append(round(pal, 2))
+            self.menesis_index.append(i + 1)  # menesio indeksas
+            pal = (self.suma * (self.palukanos / 100)) / 12  # apskaiciuojamos palukanos
+            self.priskaiciuota_palukanu.append(round(pal, 2))
             self.suma -= self.grazintina  # kiek liko grazinti
-            self.liko.append(self.suma)
-            mok = self.grazintina + pal
-            self.moketi.append(round(mok, 2))
+            self.liko_grazinti.append(self.suma)
+            mok = self.grazintina + pal  # apskaiciuojama kiek reikia grazinti per menesi
+            self.moketi_menesi.append(round(mok, 2))
 
     def info(self):
+        '''
+        :return: parodo kredito informacija
+        '''
         print("{:<8} {:<8} {:<12} {:<12} {:<8}".format("Suma", "Terminas", "Palūkanos", "Palukanu suma", "Bendra suma"))
         print(
-            "{:<8} {:<8} {:<12} {:<12} {:<8}".format(len(self.menesis) * self.grazintina, self.terminas, self.palukanos,
-                                                     sum(self.prisk_pal), sum(self.moketi)))
+            "{:<8} {:<8} {:<12} {:<12} {:<8}".format(len(self.menesis_index) * self.grazintina, self.terminas, self.palukanos,
+                                                     sum(self.priskaiciuota_palukanu), sum(self.moketi_menesi)))
 
     def grafikas(self):
+        '''
+        :return: sukuria grafika su kredito informacija
+        '''
         print("{:<8} {:<8} {:<12} {:<12} {:<8}".format("Mėnuo", "Dalis", "Likutis", "Palūkanos", "Suma"))
         for i in range(self.terminas):
-            print("{:<8} {:<8} {:<12} {:<12} {:<8}".format(self.menesis[i], self.grazintina, self.liko[i],
-                                                           self.prisk_pal[i], self.moketi[i]))
+            print("{:<8} {:<8} {:<12} {:<12} {:<8}".format(self.menesis_index[i], self.grazintina, self.liko_grazinti[i],
+                                                           self.priskaiciuota_palukanu[i], self.moketi_menesi[i]))
 
-        print("{:<8} {:<8} {:<12} {:<12} {:<8}".format("Bendra:", len(self.menesis) * self.grazintina, "",
-                                                       round(sum(self.prisk_pal), 2), round(sum(self.moketi), 2)))
+        print("{:<8} {:<8} {:<12} {:<12} {:<8}".format("Bendra:", len(self.menesis_index) * self.grazintina, "",
+                                                       round(sum(self.priskaiciuota_palukanu), 2), round(sum(self.moketi_menesi), 2)))
 
 
 uzklausos = []
 
 
 def visos_uzklausos():
+    '''
+    :return: parodomos visos uzklausos
+    '''
     while True:
         print("Visos paskolos: ")
         for i in range(len(uzklausos)):
@@ -61,6 +78,9 @@ def visos_uzklausos():
 
 
 def redagavimas():
+    '''
+    :return: leidzia redaguoti eilute
+    '''
     eilute = int(input("pasirinkite eilute: "))
     print(uzklausos[eilute - 1][0], uzklausos[eilute - 1][1], uzklausos[eilute - 1][2])
     pirm = float(input("pakeiskite suma: "))
@@ -72,6 +92,9 @@ def redagavimas():
 
 
 def grafiko_isvedimas():
+    '''
+    :return: isvedamas grafikas
+    '''
     eilute = int(input("pasirinkite eilute: "))
     p1 = Paskola(uzklausos[eilute - 1][0], uzklausos[eilute - 1][1], uzklausos[eilute - 1][2])
     p1.skaiciuokle()
@@ -79,6 +102,9 @@ def grafiko_isvedimas():
 
 
 def info_isvedimas():
+    '''
+    :return: isvedama informacija
+    '''
     eilute = int(input("pasirinkite eilute: "))
     print(type(uzklausos[eilute - 1][0]), type(uzklausos[eilute - 1][1]), type(uzklausos[eilute - 1][2]))
     p1 = Paskola(uzklausos[eilute - 1][0], uzklausos[eilute - 1][1], uzklausos[eilute - 1][2])
