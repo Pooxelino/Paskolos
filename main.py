@@ -102,10 +102,3 @@ while True:
         break
     else:
         print("Tokio veiksmo nera")
-
-fds
-
-fsd
-f
-sd
-forsd
