@@ -102,3 +102,5 @@ while True:
         break
     else:
         print("Tokio veiksmo nera")
+
+#gsdfgdsfgdsfg
